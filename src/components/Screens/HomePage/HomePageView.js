@@ -6,12 +6,7 @@ import SectionCard from '../../card/SectionCard';
 export default function HomePageView() {
   return (
     <View style={HomePageStyles.container}>
-      <SectionCard
-      // key={cardsList[cardIndex].id.toString()}
-      // id={cardsList[cardIndex].id}
-      // question={cardsList[cardIndex].question}
-      // answer={cardsList[cardIndex].answer}
-      ></SectionCard>
+      <SectionCard />
     </View>
   );
 }

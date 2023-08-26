@@ -1,27 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCards, removeCard } from '../../redux/slices/cardsSlice';
+import CardItem from './CardItem';
 
 const SectionCard = (card) => {
   const dispatch = useDispatch();
   const cardsList = useSelector(selectCards);
   const [cardIndex, setCardIndex] = useState(0);
+  const cardContent = cardsList[cardIndex];
+  const { question, answer } = cardContent;
+
   const deleteCard = (id) => {
     console.log('deleting card id', id);
     dispatch(removeCard({ id }));
   };
+
+  const indexTestToggle = (index) => {
+    setCardIndex(cardIndex === 1 ? 0 : 1);
+  };
+
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log('card', card.id);
-        deleteCard(card.id);
+        indexTestToggle();
       }}
     >
-      <View>
-        <Text>{cardsList[cardIndex].question} </Text>
-        <Text>{cardsList[cardIndex].answer} </Text>
-      </View>
+      <CardItem question={cardContent.question} answer={cardContent.answer} />
     </TouchableOpacity>
   );
 };
