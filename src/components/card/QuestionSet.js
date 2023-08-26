@@ -1,6 +1,7 @@
 import { Text, View } from 'react-native';
+import CardContainerStyles from '../styles/CardContainerStyles';
 
-const CardItem = (props) => {
+const QuestionSet = (props) => {
   const question =
     props.question !== undefined ? props.question : 'What is the problem?';
   const answer =
@@ -8,10 +9,10 @@ const CardItem = (props) => {
 
   return (
     <View>
-      <Text>{question}</Text>
-      <Text>{answer}</Text>
+      <Text style={CardContainerStyles.question}>{question}</Text>
+      <Text style={CardContainerStyles.answer}>{answer}</Text>
     </View>
   );
 };
 
-export default CardItem;
+export default QuestionSet;

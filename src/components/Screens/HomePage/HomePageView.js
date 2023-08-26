@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import HomePageStyles from '../../styles/HomePageStyles';
-import SectionCard from '../../card/SectionCard';
+import CardContainer from '../../card/CardContainer';
 
 export default function HomePageView() {
   return (
-    <View style={HomePageStyles.container}>
-      <SectionCard />
-    </View>
+    <SafeAreaView style={HomePageStyles.container}>
+      <View>
+        <CardContainer />
+      </View>
+    </SafeAreaView>
   );
 }
