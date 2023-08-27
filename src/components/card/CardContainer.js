@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  Animated,
+  PanResponder,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCards, removeCard } from '../../redux/slices/cardsSlice';
 import QuestionSet from './QuestionSet';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const CardContainer = (card) => {
   const dispatch = useDispatch();

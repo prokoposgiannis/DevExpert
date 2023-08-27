@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, View } from 'react-native';
 import HomePageStyles from '../../styles/HomePageStyles';
 import CardContainer from '../../card/CardContainer';
+import Demo from '../../card/Demo';
 
 export default function HomePageView() {
   return (
