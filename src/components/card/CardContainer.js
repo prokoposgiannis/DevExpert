@@ -16,47 +16,29 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const CardContainer = (card) => {
+  const [noMoreCard, setNoMoreCard] = useState(false);
   const dispatch = useDispatch();
   const cardsList = useSelector(selectCards);
   const [cardIndex, setCardIndex] = useState(0);
-  const cardContent = cardsList[cardIndex];
-  const { question, answer } = cardContent;
-
-  const leftSwipe = () => {
-    return (
-      <View>
-        <Text>OI</Text>
-      </View>
-    );
-  };
+  const { question, answer } = cardsList[cardIndex];
 
   return (
-    <GestureHandlerRootView>
-      <Swipeable renderLeftActions={leftSwipe}>
-        <QuestionSet question={question} answer={answer} />
-      </Swipeable>
-    </GestureHandlerRootView>
+    <View>
+      {cardsList.map((item, key) => (
+        <QuestionSet
+          key={key}
+          item={item}
+          question={item.question}
+          answer={item.answer}
+        />
+      ))}
+      {noMoreCard ? (
+        <Text style={{ fontSize: 22, color: '#000' }}>
+          No more questions found. Please add some manually or start again.
+        </Text>
+      ) : null}
+    </View>
   );
 };
 
 export default CardContainer;
-
-// return (
-//   <TouchableOpacity
-//     style={CardContainerStyles.container}
-//     onPress={() => {
-//       indexTestToggle();
-//     }}
-//   >
-//     <QuestionSet question={question} answer={answer} />
-//   </TouchableOpacity>
-// );
-
-// const deleteCard = (id) => {
-//   console.log('deleting card id', id);
-//   dispatch(removeCard({ id }));
-// };
-
-// const indexTestToggle = (index) => {
-//   setCardIndex(cardIndex === 1 ? 0 : 1);
-// };

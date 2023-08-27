@@ -127,14 +127,6 @@ const Demo = () => {
   };
 
   return (
-    // <SafeAreaView style={{ flex: 1 }}>
-    //   <Text style={styles.titleText}>
-    //     React Native Swipeable Card View UI like Tinder
-    //   </Text>
-    //   <Text style={styles.swipeText}>
-    //     Last Card Swipe Direction was{'\n'}
-    //     {swipeDirection}
-    //   </Text>
     <View style={styles.container}>
       {sampleCardArray.map((item, key) => (
         <SwipeableCard
@@ -148,7 +140,6 @@ const Demo = () => {
         <Text style={{ fontSize: 22, color: '#000' }}>No Cards Found.</Text>
       ) : null}
     </View>
-    // </SafeAreaView>
   );
 };
 
