@@ -1,10 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { db, collection, getDocs } from '../../firebase/config';
 
 const initialState = {
-  homeScreenCards: [
-    { id: 1, question: 'What are you?', answer: 'The best.' },
-    { id: 2, question: 'Where are you?', answer: 'On the TOP!' },
-  ],
+  homeScreenCards: [],
+};
+
+const getCards = () => {
+  const articlesRef = collection(db, 'cards');
+  return getDocs(articlesRef);
 };
 
 const cards = createSlice({
@@ -15,15 +18,26 @@ const cards = createSlice({
       let cardIndex = state.homeScreenCards.findIndex(
         (card) => card.id === action.payload.id
       );
-      console.log('CardIndex', cardIndex);
-      console.log('removed', state.homeScreenCards.splice(cardIndex, 1));
+      console.log(`removed card ${cardIndex + 1}`),
+        state.homeScreenCards.splice(cardIndex);
     },
-    addCard: (state, action) => {
+    loveCard: (state, action) => {
+      let cardIndex = state.homeScreenCards.findIndex(
+        (card) => card.id === action.payload.id
+      );
+
+      state.homeScreenCards[cardIndex].isLoved =
+        !state.homeScreenCards[cardIndex].isLoved;
+    },
+
+    addHomeScreenCards: (state, action) => {
       state.homeScreenCards.push(...action.payload.cards);
     },
   },
 });
 
 export const selectCards = (state) => state.cards.homeScreenCards;
-export const { removeCard, addCard } = cards.actions;
+export const { removeCard, addCard, loveCard, addHomeScreenCards } =
+  cards.actions;
+export { getCards };
 export default cards.reducer;

@@ -1,44 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  Animated,
-  PanResponder,
-} from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCards, removeCard } from '../../redux/slices/cardsSlice';
-import QuestionSet from './QuestionSet';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-const SCREEN_WIDTH = Dimensions.get('window').width;
+  selectCards,
+  getCards,
+  addHomeScreenCards,
+} from '../../redux/slices/cardsSlice';
+import CardItem from './CardItem';
+import { useDispatch } from 'react-redux';
 
-const CardContainer = (card) => {
-  const [noMoreCard, setNoMoreCard] = useState(false);
-  const dispatch = useDispatch();
+const CardContainer = () => {
   const cardsList = useSelector(selectCards);
-  const [cardIndex, setCardIndex] = useState(0);
-  const { question, answer } = cardsList[cardIndex];
+  const dispatch = useDispatch();
 
-  return (
-    <View>
-      {cardsList.map((item, key) => (
-        <QuestionSet
-          key={key}
-          item={item}
-          question={item.question}
-          answer={item.answer}
-        />
-      ))}
-      {noMoreCard ? (
-        <Text style={{ fontSize: 22, color: '#000' }}>
-          No more questions found. Please add some manually or start again.
-        </Text>
-      ) : null}
-    </View>
-  );
+  showCollectionResponse = () => {
+    getCards()
+      .then((snapshot) => {
+        let cards = [];
+        snapshot.forEach((doc) => {
+          let card = doc.data();
+          card.id = doc.id;
+          cards.push(card);
+        });
+        dispatch(addHomeScreenCards({ cards }));
+      })
+      .catch((error) => {
+        console.log('Error getting articles:\n', error);
+      });
+  };
+
+  useEffect(() => {
+    showCollectionResponse();
+  }, []);
+
+  return cardsList.map((item, key) => <CardItem key={key} item={item} />);
 };
 
 export default CardContainer;

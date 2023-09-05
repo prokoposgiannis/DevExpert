@@ -1,26 +1,47 @@
 import { StyleSheet } from 'react-native';
 
-const backgroundColor = '#F7F7F7';
-const primaryColor = '#5091ee';
-const barIconTextColor = '#fff';
-const itemDataColor = '#41BAE6';
-const articleFontFamily = 'sans-serif'; //android
-const articleTextColor = '#737373';
+const CardBackgroundColor = 'yellow';
 
 export default StyleSheet.create({
-  container: {
+  AppContainer: {
+    flexDirection: 'column',
     flex: 1,
-    backgroundColor: 'white',
+  },
+
+  cardStyle: {
+    backgroundColor: CardBackgroundColor,
+    position: 'absolute',
     justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: 'black',
+    shadowOffset: {
+      width: -1,
+      height: 3,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    borderRadius: 6,
   },
-  question: {
-    backgroundColor: 'red',
-    fontSize: 50,
-    textAlign: 'center',
+  cardContent: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    width: '100%',
   },
-  answer: {
-    backgroundColor: 'grey',
-    fontSize: 40,
-    textAlign: 'center',
+
+  viewAnswerButton: {
+    position: 'absolute',
+    textAlign: 'right',
+    fontSize: 14,
+    right: '4%',
+    bottom: '2%',
+  },
+
+  loveTheCardButton: {
+    position: 'absolute',
+    textAlign: 'right',
+    fontSize: 14,
+    right: '4%',
+    top: '2%',
   },
 });
