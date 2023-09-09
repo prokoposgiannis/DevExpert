@@ -24,8 +24,7 @@ const CardContent = (item) => {
       >
         <Text>{isLoved}</Text>
       </TouchableOpacity>
-      {/* <Text>{question}</Text>
-      <Text>{answer}</Text> */}
+
       <Text>{content}</Text>
       <TouchableOpacity
         style={[HomePageStyles.viewAnswerButton]}
