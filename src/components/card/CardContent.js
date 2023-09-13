@@ -1,5 +1,14 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
 import HomePageStyles from '../styles/HomePageStyles';
+
+const { width, height } = Dimensions.get('screen');
 
 const CardContent = (item) => {
   const isLoved = item.isLoved === true ? '<3' : '</3';
@@ -15,27 +24,52 @@ const CardContent = (item) => {
       : 'This card returned Undefined, go tell John!';
 
   return (
-    <View style={HomePageStyles.cardContent}>
-      <TouchableOpacity
-        style={[HomePageStyles.loveTheCardButton]}
-        onPress={() => {
-          loveTheCard();
+    <View
+      style={{
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      <View
+        style={{
+          flex: 1,
+          margin: 10,
+          backgroundColor: 'yellow',
+          borderRadius: 10,
+          borderColor: 'black',
+          borderWidth: 3,
         }}
       >
-        <Text>{isLoved}</Text>
-      </TouchableOpacity>
-
-      <Text>{content}</Text>
-      <TouchableOpacity
-        style={[HomePageStyles.viewAnswerButton]}
-        onPress={() => {
-          cardExpander();
-        }}
-      >
-        <Text>Λύση</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          // style={[HomePageStyles.loveTheCardButton]}
+          onPress={() => {
+            loveTheCard();
+          }}
+        >
+          <Text>{isLoved}</Text>
+        </TouchableOpacity>
+        <View style={{ flex: 1 }}>
+          <ScrollView>
+            <Text style={styles.text}>{content}</Text>
+          </ScrollView>
+        </View>
+        <TouchableOpacity
+          // style={HomePageStyles.viewAnswerButton}
+          onPress={() => {
+            cardExpander();
+          }}
+        >
+          <Text>Λύση</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 24,
+  },
+});
 
 export default CardContent;

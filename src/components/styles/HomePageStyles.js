@@ -10,7 +10,6 @@ export default StyleSheet.create({
 
   cardStyle: {
     backgroundColor: CardBackgroundColor,
-    position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: 'black',
