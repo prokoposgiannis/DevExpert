@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View } from 'react-native';
 import CardContainer from '../../card/CardContainer';
+import BottomBar from '../../bottomBar/BottomBar';
 
 const flexAndColorSetter = (flex, backgroundColor) => {
   return { flex, backgroundColor };
@@ -13,7 +14,7 @@ export default function HomePageView() {
       <View style={flexAndColorSetter(8, 'pink')}>
         <CardContainer />
       </View>
-      <View style={flexAndColorSetter(1, 'white')} />
+      <BottomBar style={{ flex: 1 }} />
     </View>
   );
 }
