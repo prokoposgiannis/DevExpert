@@ -1,7 +1,15 @@
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { SimpleLineIcons, Ionicons } from '@expo/vector-icons';
+import { useDispatch } from 'react-redux';
+import { changeModalVisibility } from '../../redux/slices/modalsSlice';
 
 const BottomBar = () => {
+  const dispatch = useDispatch();
+
+  const doChangeModalVisibility = () => {
+    dispatch(changeModalVisibility('addNewCardModal'));
+  };
+
   return (
     <View
       style={{
@@ -14,7 +22,7 @@ const BottomBar = () => {
       <TouchableOpacity onPress={() => console.log('menu')}>
         <Ionicons name='menu' size={32} color='black' />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => console.log('new')}>
+      <TouchableOpacity onPress={() => doChangeModalVisibility()}>
         <Ionicons name='md-add-sharp' size={32} color='black' />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => console.log('options')}>

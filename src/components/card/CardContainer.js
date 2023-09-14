@@ -7,7 +7,7 @@ import {
   addHomeScreenCards,
 } from '../../redux/slices/cardsSlice';
 import CardItem from './CardItem';
-import Pagination from '../Pagination';
+// import Pagination from '../Pagination';
 
 import { useDispatch } from 'react-redux';
 
@@ -15,7 +15,7 @@ const CardContainer = () => {
   const cardsList = useSelector(selectCards);
   const dispatch = useDispatch();
   const scrollX = useRef(new Animated.Value(0)).current;
-  const [index, setIndex] = useState(0);
+  // const [index, setIndex] = useState(0);
 
   showCollectionResponse = () => {
     getCards()
@@ -33,15 +33,15 @@ const CardContainer = () => {
       });
   };
 
-  const handleOnScroll = (event) => {
-    Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
-      useNativeDriver: false,
-    })(event);
-  };
+  // const handleOnScroll = (event) => {
+  //   Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
+  //     useNativeDriver: false,
+  //   })(event);
+  // };
 
-  const handleOnViewableItemsChanged = useRef(({ viewableItems }) => {
-    setIndex(viewableItems[0].index);
-  }).current;
+  // const handleOnViewableItemsChanged = useRef(({ viewableItems }) => {
+  //   setIndex(viewableItems[0].index);
+  // }).current;
 
   const viewabilityConfig = useRef({
     itemVisiblePercentThreshold: 50,
@@ -61,9 +61,9 @@ const CardContainer = () => {
         data={cardsList}
         renderItem={({ item }) => <CardItem item={item} />}
         keyExtractor={(item) => item.id}
-        onScroll={handleOnScroll}
-        onViewableItemsChanged={handleOnViewableItemsChanged}
-        viewabilityConfig={viewabilityConfig}
+        // onScroll={handleOnScroll}
+        // onViewableItemsChanged={handleOnViewableItemsChanged}
+        // viewabilityConfig={viewabilityConfig}
       />
       {/* <Pagination data={cardsList} scrollX={scrollX} index={index} /> */}
     </View>
