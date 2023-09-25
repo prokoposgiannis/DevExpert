@@ -58,6 +58,20 @@ const deleteCardToFirestore = (id) => {
     });
 };
 
+const loveCardToFirestore = (id, newBooleanValue) => {
+  const docRef = doc(db, 'cards', id);
+
+  updateDoc(docRef, {
+    isLoved: newBooleanValue,
+  })
+    .then(() => {
+      console.log('Love state has been updated successfully.');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 export {
   db,
   addCardToFirestore,
@@ -69,6 +83,7 @@ export {
   setDoc,
   deleteDoc,
   deleteCardToFirestore,
+  loveCardToFirestore,
   query,
   where,
 };

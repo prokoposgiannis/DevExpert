@@ -5,6 +5,7 @@ import {
   getDocs,
   addCardToFirestore,
   deleteCardToFirestore,
+  loveCardToFirestore,
 } from '../../firebase/config';
 
 const initialState = {
@@ -37,6 +38,9 @@ const cards = createSlice({
 
       state.homeScreenCards[cardIndex].isLoved =
         !state.homeScreenCards[cardIndex].isLoved;
+
+      let cardId = state.homeScreenCards[cardIndex].id;
+      loveCardToFirestore(cardId, state.homeScreenCards[cardIndex].isLoved);
     },
 
     addHomeScreenCards: (state, action) => {
