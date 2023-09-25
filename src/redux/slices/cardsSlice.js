@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { db, collection, getDocs } from '../../firebase/config';
+import {
+  db,
+  collection,
+  getDocs,
+  addCardToFirestore,
+  deleteCardToFirestore,
+} from '../../firebase/config';
 
 const initialState = {
   homeScreenCards: [],
@@ -18,9 +24,12 @@ const cards = createSlice({
       let cardIndex = state.homeScreenCards.findIndex(
         (card) => card.id === action.payload.id
       );
-      console.log(`removed card ${cardIndex + 1}`),
-        state.homeScreenCards.splice(cardIndex);
+      let cardId = state.homeScreenCards[cardIndex].id;
+
+      state.homeScreenCards.splice(cardIndex, 1);
+      deleteCardToFirestore(cardId);
     },
+
     loveCard: (state, action) => {
       let cardIndex = state.homeScreenCards.findIndex(
         (card) => card.id === action.payload.id
@@ -33,11 +42,24 @@ const cards = createSlice({
     addHomeScreenCards: (state, action) => {
       state.homeScreenCards.push(...action.payload.cards);
     },
+
+    addCardToRedux: (state, action) => {
+      let {
+        category,
+        question,
+        answer,
+        isLoved,
+        key,
+        cardNumber = state.homeScreenCards.length + 1,
+      } = action.payload;
+      state.homeScreenCards.push(action.payload);
+      addCardToFirestore(category, question, answer, isLoved, key, cardNumber);
+    },
   },
 });
 
 export const selectCards = (state) => state.cards.homeScreenCards;
-export const { removeCard, addCard, loveCard, addHomeScreenCards } =
+export const { removeCard, addCardToRedux, loveCard, addHomeScreenCards } =
   cards.actions;
 export { getCards };
 export default cards.reducer;

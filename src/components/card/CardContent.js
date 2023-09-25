@@ -17,6 +17,7 @@ const CardContent = (item) => {
     item.question !== undefined ? item.question : 'What is the problem?';
   const content = isCardexpanded === true ? item.answer : item.question;
   const loveTheCard = () => item.loveCard();
+  const delteTheCard = () => item.deleteCard();
   const cardExpander = () => item.cardExpander();
   const answer =
     item.answer !== undefined
@@ -47,6 +48,14 @@ const CardContent = (item) => {
           }}
         >
           <Text>{isLoved}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          // style={[HomePageStyles.loveTheCardButton]}
+          onPress={() => {
+            delteTheCard();
+          }}
+        >
+          <Text>DELETE</Text>
         </TouchableOpacity>
         <View style={{ flex: 1 }}>
           <ScrollView>

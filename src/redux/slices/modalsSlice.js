@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { db, collection, getDocs } from '../../firebase/config';
 
 const initialState = {
   modalObjects: [{ name: 'addNewCardModal', isVisible: false }],
@@ -14,7 +15,6 @@ const modals = createSlice({
       );
       state.modalObjects[modalIndex].isVisible =
         !state.modalObjects[modalIndex].isVisible;
-      console.log(state.modalObjects[modalIndex].isVisible);
     },
   },
 });

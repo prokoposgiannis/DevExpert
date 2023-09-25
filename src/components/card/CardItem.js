@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, FlatList, Dimensions, StyleSheet } from 'react-native';
+import { View, Dimensions, StyleSheet } from 'react-native';
 import CardContent from './CardContent';
 import HomePageStyles from '../styles/HomePageStyles';
 import { removeCard, loveCard } from '../../redux/slices/cardsSlice';
@@ -17,15 +17,12 @@ const CardItem = (props) => {
     left: '10%',
   });
 
-  const deleteCard = (id) => {
+  const doDeleteCard = (id) => {
     dispatch(removeCard({ id }));
-    if (CardIsExpanded == true) {
-      console.log(CardIsExpanded);
-      setCardIsExpanded(false);
-      console.log(!CardIsExpanded);
-    } else {
-      return;
-    }
+  };
+
+  const loveTheCard = (id) => {
+    dispatch(loveCard({ id }));
   };
 
   const cardExpandController = () => {
@@ -48,10 +45,6 @@ const CardItem = (props) => {
     }
   };
 
-  const loveTheCard = (id) => {
-    dispatch(loveCard({ id }));
-  };
-
   return (
     <View
       style={styles.containerR}
@@ -72,6 +65,9 @@ const CardItem = (props) => {
         question={props.item.question}
         answer={props.item.answer}
         loveCard={() => loveTheCard(props.item.id)}
+        deleteCard={() => {
+          doDeleteCard(props.item.id);
+        }}
         cardExpander={() => cardExpandController()}
       />
     </View>
